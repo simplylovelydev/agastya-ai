@@ -33,23 +33,20 @@ d_k = \frac{n\_embd}{n\_head} = \frac{512}{8} = 64
 $$
 
 * $IL$ maps token entries outside current causal horizons to $-\infty$ values prior to passing through the softmax classification line, ensuring future tokens remain hidden during calculation loops[cite: 1].
-📂 Repository Structural Layout
+### 📂 Repository Structural Layout
+
+```text
 ├── dataset/
-│   ├── generate_chat_data.py   # Script synthesizing custom synthetic text pairs
-│   ├── input.txt               # Primary core training corpus dictionary
-│   └── large_input.txt         # Expanded corpus handling advanced contextual data
+│   ├── generate_chat_data.py    # Script synthesizing custom synthetic chat datasets[cite: 2]
+│   ├── input.txt                # Primary core training corpus dictionary[cite: 2]
+│   └── large_input.txt          # Expanded corpus handling advanced conversational flows[cite: 2]
 ├── frontend/ (Next.js App)
 │   ├── app/
-│   │   ├── layout.tsx          # System viewport viewport mapping
-│   │   └── page.tsx            # Next.js Brutalist chat stream dashboard interface
-│   ├── package.json            # Client structural system dependency manifests
-│   └── tailwind.config.js      # Styling mapping properties handles
+│   │   ├── layout.tsx           # System viewport mapping[cite: 2]
+│   │   └── page.tsx             # Next.js Brutalist chat stream dashboard[cite: 2]
+│   ├── package.json             # Client structural system dependencies[cite: 2]
+│   └── tailwind.config.js       # Styling mapping properties handler[cite: 2]
 ├── model/ (Local Artifact Cache)
-│   ├── agastya_final_chatbot.pth # Saved Pytorch tensor layer weights binary
-│   └── agastya_tokenizer.json  # Saved custom trained Byte-Level BPE vocab maps
-├── train_tokenizer.py          # Dual-track custom BPE engine training pipeline
-├── finetune_agastya.py         # Causal cross-entropy gradient tracking train loop
-├── talk_to_agastya.py          # Local interactive testing terminal handler
-├── main_api.py                 # FastAPI local system loop loop back streaming server
-├── register_hf_model.py        # Automated cloud artifact upload synchronization hub
-└── benchmark_hf_agastya.py     # Live remote cloud model telemetry ben
+│   ├── agastya_final_chatbot.pth  # Saved PyTorch tensor layer weights[cite: 2]
+│   └── agastya_tokenizer.json     # Saved custom trained Byte-Level BPE tokenizer[cite: 2]
+└── train_tokenizer.py           # Dual-track custom BPE engine training script[cite: 2]
