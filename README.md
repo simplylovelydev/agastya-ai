@@ -13,91 +13,26 @@ Context Horizon (block_size)	256 Sub-word Tokens	Total attention span allocation
 Vocabulary Size (vocab_size)	2,000 Allocations	Specialized Byte-Level BPE tokenizations
 Tensor Precision	32-bit Floating-Point (FP32)	Core calculation resolution tracking
 Active Memory/VRAM Load	~184.80 MB	Full network weight footprint in execution
-🧬 Mathematical Formulation
-The core calculation driving Agastya's predictive capability uses a causal Scaled Dot-Product Attention mechanism combined with a strict lower-triangular causal attention mask matrix ($IL$) to enforce autoregressive token serialization.
+### 🧬 Mathematical Formulation
 
-The attention computation maps matrices according to the following equation:
+The core calculation driving Agastya's predictive capability uses a causal Scaled Dot-Product Attention mechanism combined with a strict lower-triangular causal attention mask matrix ($IL$) to enforce autoregressive token serialization[cite: 1].
 
-A
-t
-t
-e
-n
-t
-i
-o
-n
-(
-Q
-,
-K
-,
-V
-)
-=
-softmax
-(
-Q
-K
-T
-d
-k
-+
-I
-L
-)
-V
-Attention(Q,K,V)=softmax( 
-d 
-k
-​
- 
-​
- 
-QK 
-T
- 
-​
- +IL)V
+The attention computation maps matrices according to the following equation[cite: 1]:
 
-Where:
+$$
+\text{Attention}(Q, K, V) = \text{softmax} \left( \frac{QK^T}{\sqrt{d_k}} + IL \right) V
+$$
 
-$Q$, $K$, and $V$ represent the Query, Key, and Value vector translations extracted out of input hidden tensors via independent linear projection planes.
-$d_k$ is the scaling dimension factor derived directly via:
-d
-k
-=
-n
-_
-e
-m
-b
-d
-n
-_
-h
-e
-a
-d
-=
-512
-8
-=
-64
-d 
-k
-​
- = 
-n_head
-n_embd
-​
- = 
-8
-512
-​
- =64
+Where[cite: 1]:
 
-$IL$ maps token entries outside current causal horizons to $-\infty$ values prior to passing through the softmax classification line, ensuring future tokens remain hidden during calculation loops.
+* $Q$, $K$, and $V$ represent the **Query**, **Key**, and **Value** vector translations extracted out of input hidden tensors via independent linear projection planes[cite: 1].
+* $d_k$ is the scaling dimension factor derived directly via[cite: 1]:
+
+$$
+d_k = \frac{n\_embd}{n\_head} = \frac{512}{8} = 64
+$$
+
+* $IL$ maps token entries outside current causal horizons to $-\infty$ values prior to passing through the softmax classification line, ensuring future tokens remain hidden during calculation loops[cite: 1].
 📂 Repository Structural Layout
 ├── dataset/
 │   ├── generate_chat_data.py   # Script synthesizing custom synthetic text pairs
