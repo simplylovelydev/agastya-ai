@@ -13,6 +13,20 @@ Context Horizon (block_size)	256 Sub-word Tokens	Total attention span allocation
 Vocabulary Size (vocab_size)	2,000 Allocations	Specialized Byte-Level BPE tokenizations
 Tensor Precision	32-bit Floating-Point (FP32)	Core calculation resolution tracking
 Active Memory/VRAM Load	~184.80 MB	Full network weight footprint in execution
+### 📊 Technical Architecture Specifications
+
+Agastya completely bypasses generic pre-packaged wrappers like Hugging Face `transformers` classes for its core training lifecycle. Its neural layers are instantiated explicitly out of raw tensor modules using the following structural dimensions[cite: 3]:
+
+| Architectural Component | Specification Parameter | Functional Description |
+| :--- | :--- | :--- |
+| **Total Parameters** | 38,154,240 (~38M)[cite: 3] | Active computational weight matrices[cite: 3] |
+| **Layer Depth (`n_layer`)** | 12 Blocks[cite: 3] | Sequential Pre-LN Transformer layers[cite: 3] |
+| **Attention Heads (`n_head`)** | 8 Heads[cite: 3] | Parallel contextual subspace windows[cite: 3] |
+| **Embedding Width (`n_embd`)** | 512 Dimensions[cite: 3] | Hidden feature vector state width[cite: 3] |
+| **Context Horizon (`block_size`)** | 256 Sub-word Tokens[cite: 3] | Total attention span allocation boundary[cite: 3] |
+| **Vocabulary Size (`vocab_size`)** | 2,000 Allocations[cite: 3] | Specialized Byte-Level BPE tokenizations[cite: 3] |
+| **Tensor Precision** | 32-bit Floating-Point (FP32)[cite: 3] | Core calculation resolution tracking[cite: 3] |
+| **Active Memory/VRAM Load** | ~184.80 MB[cite: 3] | Full network weight footprint in execution[cite: 3] |
 ### 🧬 Mathematical Formulation
 
 The core calculation driving Agastya's predictive capability uses a causal Scaled Dot-Product Attention mechanism combined with a strict lower-triangular causal attention mask matrix ($IL$) to enforce autoregressive token serialization[cite: 1].
